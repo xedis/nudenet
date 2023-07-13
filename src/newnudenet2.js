@@ -87,18 +87,6 @@ function rect({ canvas, x = 0, y = 0, width = 0, height = 0, radius = 8, lineWid
   ctx.fillText(title, x + 4, y - 4);
 }
 
-// blur par of canvas by redrawing it with smaller resulution
-function blur({ canvas, left = 0, top = 0, width = 0, height = 0 }) {
-  if (!canvas) return;
-  const blurCanvas = new Canvas(width / options.blurRadius, height / options.blurRadius);
-  const blurCtx = blurCanvas.getContext('2d');
-  if (!blurCtx) return;
-  blurCtx.imageSmoothingEnabled = true;
-  blurCtx.drawImage(canvas, left, top, width, height, 0, 0, width / options.blurRadius, height / options.blurRadius);
-  const canvasCtx = canvas.getContext('2d');
-  canvasCtx.drawImage(blurCanvas, left, top, width, height);
-}
-
 // read image file and prepare tensor for further processing
 function getTensorFromImage(imageFile) {
   if (!fs.existsSync(imageFile)) {
